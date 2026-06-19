@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Flashcard Digital</title>
+    <style>
+        /* Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container do Flashcard */
+        .card-container {
+            width: 320px;
+            height: 450px;
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        /* Vira o cartão ao passar o mouse */
+        .card-container:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        /* Lados do Cartão */
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        /* Estilo da Frente */
+        .front {
+            background-color: #ffffff;
+            border: 3px solid #4a90e2;
+        }
+
+        .front img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .front h2 {
+            color: #4a90e2;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Estilo do Verso */
+        .back {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            transform: rotateY(180deg);
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .back h3 {
+            font-size: 1.3rem;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .back p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Rodapé customizado com seu nome */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        footer span {
+            color: #4a90e2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="card">
+            
+            <div class="front">
+                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Servidores de Internet">
+                <h2>Como a internet chega na minha casa?</h2>
+                <div class="hint">Passe o mouse para descobrir</div>
+            </div>
+            
+            <div class="back">
+                <h3>A Resposta:</h3>
+                <p>A internet viaja pelo mundo todo através de gigantescos cabos de fibra óptica submarinos esticados no fundo dos oceanos. Depois, ela passa por provedores locais e chega até o roteador da sua casa via cabos ou sinais de luz!</p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        Desenvolvido por: <span>Mauricio Jurevicz Marques</span>
+    </footer>
+
+</body>
+</html>
