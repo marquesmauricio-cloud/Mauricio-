@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrutura Alura - Cabeçalho, Principal e Rodapé</title>
+    <style>
+        /* Configurações Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #1c1c1c;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 1. CABEÇALHO (HEADER) */
+        header {
+            background-color: #111827; /* Azul escuro/grafite */
+            color: #ffffff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00c86f; /* Linha verde característica */
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00c86f;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #00c86f;
+        }
+
+        /* 2. CONTEÚDO PRINCIPAL (MAIN) */
+        main {
+            flex: 1; /* Garante que o conteúdo ocupe o espaço disponível, empurrando o rodapé para baixo */
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-section {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .schools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .school-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #4f46e5; /* Detalhe roxo */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .school-card h3 {
+            margin-bottom: 10px;
+            color: #4f46e5;
+        }
+
+        /* 3. RODAPÉ (FOOTER) */
+        footer {
+            background-color: #050b14; /* Tom ainda mais escuro para o rodapé */
+            color: #9ca3af;
+            padding: 30px 5%;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">alura</div>
+        <nav>
+            <a href="#">Cursos</a>
+            <a href="#">Formações</a>
+            <a href="#">Para Empresas</a>
+            <a href="#">Entrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Mergulhe em Tecnologia!</h1>
+            <p>Estude Programação, Front-end, Data Science, Inteligência Artificial e muito mais.</p>
+        </section>
+
+        <h2>Nossas Escolas:</h2>
+        <br>
+        <div class="schools-grid">
+            <div class="school-card">
+                <h3>Programação</h3>
+                <p>Aprenda Java, Python, C#, PHP e domine a lógica por trás dos softwares.</p>
+            </div>
+            <div class="school-card">
+                <h3>Front-end</h3>
+                <p>Desenvolva interfaces modernas usando HTML, CSS, JavaScript e React.</p>
+            </div>
+            <div class="school-card">
+                <h3>Inteligência Artificial</h3>
+                <p>Descubra como aplicar ferramentas de IA e Engenharia de Prompt no seu dia a dia.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <h4>Sobre a Alura</h4>
+                <ul>
+                    <li><a href="#">Trabalhe conosco</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Redes Sociais</h4>
+                <ul>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Alura - Todos os direitos reservados. CNPJ: 00.000.000/0001-00</p>
+        </div>
+    </footer>
+
+</body>
+</html>
