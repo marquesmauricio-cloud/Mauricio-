@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio das Notícias</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Container do cartão que define a perspectiva 3D */
+        .card-container {
+            width: 300px;
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        /* O cartão em si que vai girar */
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        /* Efeito de rotação ao passar o mouse */
+        .card-container:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        /* Estilo comum para a frente e o verso */
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilo da Frente */
+        .front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .front h2 {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .front .hint {
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: 15px;
+            opacity: 0.7;
+        }
+
+        /* Estilo do Verso */
+        .back {
+            background-color: white;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid #764ba2;
+        }
+
+        /* Cores para as marcações de Verdadeiro ou Falso */
+        .status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .verdadeiro {
+            color: #2ed573;
+        }
+
+        .falso {
+            color: #ff4757;
+        }
+
+        .back p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="front">
+                <h2>📰 Cientistas descobrem nova espécie de tubarão que brilha no escuro e vive perto de vulcões subaquáticos.</h2>
+                <div class="hint">Passe o mouse para revelar</div>
+            </div>
+            <div class="back">
+                <div class="status verdadeiro">✓ Verdadeira</div>
+                <p>Trata-se do tubarão-lanterna-ninja (<i>Etmopterus benchleyi</i>). Cientistas descobriram que ele possui células bioluminescentes para se camuflar no oceano profundo e habita áreas próximas a vulcões marinhos na América Central.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="front">
+                <h2>📰 Estudo comprova que comer chocolate antes de dormir queima calorias e ajuda a emagrecer milagrosamente.</h2>
+                <div class="hint">Passe o mouse para revelar</div>
+            </div>
+            <div class="back">
+                <div class="status falso">✗ Falsa</div>
+                <p>Embora o cacau puro tenha propriedades antioxidantes, nenhum chocolate queima calorias "milagrosamente". O ganho ou perda de peso depende do contexto da dieta e do gasto energético total.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="front">
+                <h2>📰 O 'Monstro do Lago Ness' foi finalmente capturado por mergulhadores na Escócia após ser filmado por drones.</h2>
+                <div class="hint">Passe o mouse para revelar</div>
+            </div>
+            <div class="back">
+                <div class="status falso">✗ Falsa</div>
+                <p>Imagens e vídeos que circulam na internet são montagens digitais ou filmagens de outros animais (como grandes peixes). É um boato clássico usado para atrair turismo para a região.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
