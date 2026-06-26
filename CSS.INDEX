@@ -1,0 +1,35 @@
+<style>
+    /* ...mantenha todo o restante igual... */
+
+    .card-container {
+        width: 360px;
+        height: 500px;
+        perspective: 1000px;
+        margin-bottom: 30px;
+    }
+
+    .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        padding: 30px; /* Alterado de 20px para 30px */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .front img {
+        width: 100%;
+        height: 220px; /* Alterado de 180px para 220px */
+        object-fit: cover;
+        border-radius: 12px;
+        margin-top: 10px;
+    }
+
+    /* ...mantenha todo o restante igual... */
+</style>
