@@ -1,0 +1,43 @@
+.cabecalho {
+  background-color: #7e3e1c;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+<a href="#" class="cabecalho-link">Início</a>
+.cabecalho-link {
+  color: #fff;
+  text-decoration: none;
+}
+h1 {
+  color: #fff;
+  font-size: 24px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f2f2;
+}
+footer {
+  background-color: #7e3e1c;
+  padding: 15px 25px;
+  color: #fff;
+}h1 {
+    color: #FFD700;
+    font-size: 30px;
+  }
+  
+  .cabecalho-link {
+    color: #FFD700;
+    font-size: 20px;
+  }
+  
+  footer {
+    background-color: #7e3e1c;
+    color: #FFD700;
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+  
