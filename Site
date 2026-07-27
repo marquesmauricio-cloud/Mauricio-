@@ -39,5 +39,34 @@ footer {
     color: #FFD700;
     font-size: 18px;
     padding: 15px 25px;
-  }
+  }style.css
+CSS
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+index.html
+HTML
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Projeto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Olá, mundo!</h1>
+</body>
+</html>
   
