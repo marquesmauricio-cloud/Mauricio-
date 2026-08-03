@@ -256,6 +256,13 @@
     function fecharAjuda() {
       document.getElementById('janelaAjuda').style.display = 'none';
     }
+
+    /* MELHORIA APLICADA: Fechar modal ao pressionar a tecla ESC */
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        fecharAjuda();
+      }
+    });
   </script>
 
 </body>
