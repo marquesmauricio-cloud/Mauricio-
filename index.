@@ -18,7 +18,6 @@
       color: #1a1a1a;
       line-height: 1.6;
       padding-bottom: 40px;
-      /* Tamanho de fonte base controlado via variável ou propriedade manipulada por JS */
       font-size: 1.2rem; 
       transition: font-size 0.2s ease;
     }
@@ -36,16 +35,23 @@
       margin-bottom: 12px;
     }
 
-    /* Controles de Acessibilidade de Fonte */
-    .controles-fonte {
+    /* Controles de Acessibilidade de Fonte e Áudio */
+    .controles-acessibilidade {
       margin-top: 10px;
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .grupo-controle {
+      display: flex;
+      gap: 8px;
       align-items: center;
     }
 
-    .btn-fonte {
+    .btn-acao {
       background-color: #ffffff;
       color: #0d3b66;
       border: none;
@@ -54,10 +60,24 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 1rem;
+      transition: background-color 0.2s;
     }
 
-    .btn-fonte:hover {
+    .btn-acao:hover {
       background-color: #f4a261;
+    }
+
+    .btn-audio {
+      background-color: #2a9d8f;
+      color: #ffffff;
+    }
+
+    .btn-audio.falando {
+      background-color: #e76f51;
+    }
+
+    .btn-audio:hover {
+      opacity: 0.9;
     }
 
     /* Container Principal */
@@ -215,10 +235,15 @@
 
   <header>
     <h1>Sênior Seguro <span aria-hidden="true">🛡️</span></h1>
-    <div class="controles-fonte">
-      <span style="font-size: 0.9rem;">Ajustar letra:</span>
-      <button class="btn-fonte" onclick="mudarFonte(-0.1)" aria-label="Diminuir tamanho da fonte">A-</button>
-      <button class="btn-fonte" onclick="mudarFonte(0.1)" aria-label="Aumentar tamanho da fonte">A+</button>
+    <div class="controles-acessibilidade">
+      <div class="grupo-controle">
+        <span style="font-size: 0.9rem;">Ajustar letra:</span>
+        <button class="btn-acao" onclick="mudarFonte(-0.1)" aria-label="Diminuir tamanho da fonte">A-</button>
+        <button class="btn-acao" onclick="mudarFonte(0.1)" aria-label="Aumentar tamanho da fonte">A+</button>
+      </div>
+      <div class="grupo-controle">
+        <button id="btnAudio" class="btn-acao btn-audio" onclick="alternarLeitura()" aria-label="Ouvir conteúdo da página">🔊 Ouvir Página</button>
+      </div>
     </div>
   </header>
 
@@ -296,13 +321,10 @@
       }
     });
 
-    /* MELHORIA APLICADA: Limites de tamanho de fonte (Mínimo: 1.0rem, Máximo: 2.2rem) */
-    let tamanhoAtual = 1.2; // Tamanho inicial em rem
+    let tamanhoAtual = 1.2;
 
     function mudarFonte(valor) {
       tamanhoAtual += valor;
-
-      // Definindo os limites rígidos para evitar valores inadequados
       const tamanhoMinimo = 1.0;
       const tamanhoMaximo = 2.2;
 
@@ -312,8 +334,67 @@
         tamanhoAtual = tamanhoMaximo;
       }
 
-      // Aplica o tamanho validado ao elemento raiz/body
       document.body.style.fontSize = tamanhoAtual + 'rem';
+    }
+
+    /* MELHORIA APLICADA: Proteção contra cliques múltiplos e conflitos na síntese de voz */
+    let isAguardandoAudio = false;
+
+    function alternarLeitura() {
+      const synth = window.speechSynthesis;
+
+      if (!synth) {
+        alert("Seu navegador não suporta leitura em voz alta.");
+        return;
+      }
+
+      // Evita disparos simultâneos em cliques muito rápidos
+      if (isAguardandoAudio) return;
+      isAguardandoAudio = true;
+
+      if (synth.speaking || synth.pending) {
+        // Se já houver áudio rodando ou na fila, cancela completamente e reseta
+        synth.cancel();
+        atualizarEstadoBotao(false);
+        isAguardandoAudio = false;
+      } else {
+        // Garanta a limpeza de qualquer resquício anterior
+        synth.cancel();
+
+        const textoParaLer = document.querySelector('.conteudo-principal').innerText;
+        const utterThis = new SpeechSynthesisUtterance(textoParaLer);
+        utterThis.lang = 'pt-BR';
+
+        utterThis.onstart = function() {
+          atualizarEstadoBotao(true);
+          isAguardandoAudio = false;
+        };
+
+        utterThis.onend = function() {
+          atualizarEstadoBotao(false);
+          isAguardandoAudio = false;
+        };
+
+        utterThis.onerror = function() {
+          atualizarEstadoBotao(false);
+          isAguardandoAudio = false;
+        };
+
+        synth.speak(utterThis);
+      }
+    }
+
+    function atualizarEstadoBotao(falando) {
+      const btnAudio = document.getElementById('btnAudio');
+      if (falando) {
+        btnAudio.innerText = "⏹️ Parar Leitura";
+        btnAudio.classList.add('falando');
+        btnAudio.setAttribute('aria-label', 'Parar leitura em voz alta');
+      } else {
+        btnAudio.innerText = "🔊 Ouvir Página";
+        btnAudio.classList.remove('falando');
+        btnAudio.setAttribute('aria-label', 'Ouvir conteúdo da página');
+      }
     }
   </script>
 
