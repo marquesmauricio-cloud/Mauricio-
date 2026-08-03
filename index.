@@ -18,6 +18,9 @@
       color: #1a1a1a;
       line-height: 1.6;
       padding-bottom: 40px;
+      /* Tamanho de fonte base controlado via variável ou propriedade manipulada por JS */
+      font-size: 1.2rem; 
+      transition: font-size 0.2s ease;
     }
 
     /* Cabeçalho */
@@ -29,7 +32,32 @@
     }
 
     header h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    /* Controles de Acessibilidade de Fonte */
+    .controles-fonte {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-fonte {
+      background-color: #ffffff;
+      color: #0d3b66;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-fonte:hover {
+      background-color: #f4a261;
     }
 
     /* Container Principal */
@@ -51,19 +79,19 @@
 
     .painel-ajuda h2 {
       color: #d90429;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       margin-bottom: 12px;
     }
 
     .painel-ajuda p {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       margin-bottom: 20px;
     }
 
     .botao-emergencia {
       background-color: #d90429;
       color: #ffffff;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: bold;
       border: none;
       padding: 16px 28px;
@@ -91,7 +119,7 @@
 
     .cartao-conteudo h2 {
       color: #0d3b66;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       border-bottom: 3px solid #f4a261;
       padding-bottom: 8px;
       margin-bottom: 16px;
@@ -103,7 +131,7 @@
     }
 
     .lista-dicas li {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       background-color: #eef5fc;
       border-left: 6px solid #0d3b66;
       margin-bottom: 14px;
@@ -113,21 +141,21 @@
 
     .lista-dicas strong {
       display: block;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #0d3b66;
       margin-bottom: 4px;
     }
 
     /* Seção 3: Direitos na Internet */
     .secao-direitos p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 12px;
     }
 
     /* Seção 4: Atitudes Suspeitas */
     .lista-suspeitas {
       list-style-position: inside;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     .lista-suspeitas li {
@@ -160,13 +188,13 @@
     }
 
     .janela-caixa h3 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: #d90429;
       margin-bottom: 16px;
     }
 
     .janela-caixa p {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       margin-bottom: 24px;
       text-align: left;
     }
@@ -174,7 +202,7 @@
     .botao-fechar {
       background-color: #0d3b66;
       color: #ffffff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
       border: none;
       padding: 12px 24px;
@@ -187,6 +215,11 @@
 
   <header>
     <h1>Sênior Seguro <span aria-hidden="true">🛡️</span></h1>
+    <div class="controles-fonte">
+      <span style="font-size: 0.9rem;">Ajustar letra:</span>
+      <button class="btn-fonte" onclick="mudarFonte(-0.1)" aria-label="Diminuir tamanho da fonte">A-</button>
+      <button class="btn-fonte" onclick="mudarFonte(0.1)" aria-label="Aumentar tamanho da fonte">A+</button>
+    </div>
   </header>
 
   <main class="conteudo-principal">
@@ -227,7 +260,7 @@
 
     <section class="cartao-conteudo">
       <h2><span aria-hidden="true">⚠️</span> Como saber se estou caindo em um golpe?</h2>
-      <p style="font-size: 1.2rem; margin-bottom: 12px;">Fique atento a estas atitudes suspeitas do interlocutor:</p>
+      <p style="margin-bottom: 12px;">Fique atento a estas atitudes suspeitas do interlocutor:</p>
       <ul class="lista-suspeitas">
         <li>Pedem para você transferir dinheiro em nome de terceiros ou desconhecidos.</li>
         <li>Pedem para instalar aplicativos no seu celular para "arrumar" seu aplicativo do banco.</li>
@@ -257,12 +290,31 @@
       document.getElementById('janelaAjuda').style.display = 'none';
     }
 
-    /* MELHORIA APLICADA: Fechar modal ao pressionar a tecla ESC */
     document.addEventListener('keydown', function(event) {
       if (event.key === 'Escape') {
         fecharAjuda();
       }
     });
+
+    /* MELHORIA APLICADA: Limites de tamanho de fonte (Mínimo: 1.0rem, Máximo: 2.2rem) */
+    let tamanhoAtual = 1.2; // Tamanho inicial em rem
+
+    function mudarFonte(valor) {
+      tamanhoAtual += valor;
+
+      // Definindo os limites rígidos para evitar valores inadequados
+      const tamanhoMinimo = 1.0;
+      const tamanhoMaximo = 2.2;
+
+      if (tamanhoAtual < tamanhoMinimo) {
+        tamanhoAtual = tamanhoMinimo;
+      } else if (tamanhoAtual > tamanhoMaximo) {
+        tamanhoAtual = tamanhoMaximo;
+      }
+
+      // Aplica o tamanho validado ao elemento raiz/body
+      document.body.style.fontSize = tamanhoAtual + 'rem';
+    }
   </script>
 
 </body>
